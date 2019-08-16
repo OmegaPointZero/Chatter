@@ -21,11 +21,6 @@ Server skeleton works, enough to init and run with npm. If the user sends a req 
 Chatter is in it's initial stages. The current project outlook is as follows:
 
 + Customer Service Agent login
-  + MongoDB database to hold agent data
-  + Path to add agents
-  + Path to have agents login
-  + Middleware to be sure that only agents have access to agent page
-  + Middleware to allow only certain IP addresses have access to agent registration/login
   + Keep track of number of agents logged in at any given time
   
 + Categories of Service
@@ -40,7 +35,7 @@ Chatter is in it's initial stages. The current project outlook is as follows:
   + A customer's place in line is kept track of, and shown to the customer, updated in real time with websockets
  
 + Chats
-  + Customer can see if agent is typic (sent via websockets)
+  + Customer can see if agent is typing (sent via websockets)
   + Agent can see what the customer is typing, even before message is sent
   + Chats have a maximum length
   + Each chat sent shows what time the chat was sent

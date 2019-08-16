@@ -10,6 +10,7 @@ const morgan = require('morgan'); // Logging reqs
 const passport = require('passport');
 const flash = require('connect-flash');
 
+const bodyParser = require('body-parser');
 require('dotenv').config();
 var cors = (function(req,res,next){
     if (req.method === "OPTIONS") {
@@ -22,6 +23,7 @@ var cors = (function(req,res,next){
 
 app.use(cors);
 
+app.use(bodyParser.urlencoded({extended:true}));
 mongoose.connect(process.env.MONGOURL, {useNewUrlParser:true}).then(res=>console.log('Connected to Mongo Database')).catch(err=>console.log(`error: ${err}`))
 mongoose.set('useCreateIndex',true)
 require('./config/passport')(passport);
@@ -30,6 +32,8 @@ app.use(express.static('public'));
 app.use(flash());
 
 app.use(session({secret:process.env.SESSION_SECRET,resave:true,saveUninitialized:true}))
+app.use(passport.initialize())
+app.use(passport.session())
 require('./app/routes.js')(app,passport);
 
 app.engine('html', require('ejs').renderFile);
