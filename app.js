@@ -36,14 +36,6 @@ app.engine('html', require('ejs').renderFile);
 app.set('views', 'views');
 app.set('view engine', 'html');
 
-app.use(function(req,res,next){
-    Board.find({}, function(err,boards){
-        res.status(404).render('404.ejs', {
-            allBoards: boards
-        })
-    });
-});
-
 app.listen(process.env.SERVER_PORT,function(){
     console.log(`Server started, listening for requests on port ${process.env.SERVER_PORT}`)
 })

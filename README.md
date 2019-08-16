@@ -1,6 +1,23 @@
 # Chatter
 A customer service chat client built with websockets
 
+## Getting started
+
+### .env file
+
+Chatter requires a .env file with the following values populated in order to work:
+
+.env
+    + `SESSION_SECRET` = session secret for express
+    + `SERVER_PORT` = port number for the server to listen for connections on
+    + `MONGOURL` = url of the mongo database being used (`mongodb://mongourl/databasename`)
+    + `AGENT_WHITELIST` = Comma seperated IP addresses that act as a whitelist for agent access. Should probably throw this into a database somewhere, realistically this would become quite large.
+
+
+### The latest updates
+
+Server skeleton works, enough to init and run with npm. If the user sends a req from the whitelist, the page for agents is rendered. If not, they get redirected to the welcome page for customers.
+
 Chatter is in it's initial stages. The current project outlook is as follows:
 
 + Customer Service Agent login
