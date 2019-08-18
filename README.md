@@ -42,7 +42,10 @@ Chatter requires a .env file with the following values populated in order to wor
 
 ### The latest updates
 
-Server skeleton works, enough to init and run with npm. If the user sends a req from the whitelist, the page for agents is rendered. If not, they get redirected to the welcome page for customers.
++ Current Sprint completions:
+    + Create preliminary chat window UI for customer, and for agent
+
+### Outlook
 
 Chatter is in it's initial stages. The current project outlook is as follows:
 
@@ -55,7 +58,6 @@ Chatter is in it's initial stages. The current project outlook is as follows:
   
 + Customer facing side
   + When customers visit, server adds customers to count of connected customers
-  + Let customer select category  of service needed (or 'other' to be connected to next general agent)
   + Create a queue of waiting customers, by category
     + Keep track of agents in each category, when agent becomes available, connect customer that's waited longest to the agent
   + A customer's place in line is kept track of, and shown to the customer, updated in real time with websockets

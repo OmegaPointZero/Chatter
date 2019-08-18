@@ -5,8 +5,8 @@ module.exports = (function(app,passport){
         res.render('agenthome.ejs', {user: req.user})
     })    
 
-    app.get('/customerchat', reqIsFromAgent, isAuthenticated, (req,res) => {
-        res.render('customerchat.ejs', {user: req.user})
+    app.get('/agentchat', reqIsFromAgent, isAuthenticated, (req,res) => {
+        res.render('agentchat.ejs', {user: req.user})
     })    
 
     app.get('/login', reqIsFromAgent, (req,res) =>{
@@ -46,7 +46,7 @@ module.exports = (function(app,passport){
         }
     });
 
-
+    
 
 
 

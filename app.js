@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGOURL, {useNewUrlParser:true}).then(res=>console
 mongoose.set('useCreateIndex',true)
 require('./config/passport')(passport);
 app.use(morgan('dev'))
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(flash());
 
 app.use(session({secret:process.env.SESSION_SECRET,resave:true,saveUninitialized:true}))
