@@ -30,8 +30,24 @@ module.exports = (function(app,passport){
         res.render('home.ejs')
     })    
 
+    app.get('/chat/:category', reqIsFromCustomer, (req,res) => {
+        var category = req.params.category.toLowerCase();
+        console.log(`Here's the category: ${category}`)
+        var categories = process.env.CATEGORIES.split(', ') 
+        categories = categories.map(function(e) { return e.toLowerCase() })
+        console.log(`Categories array: ${categories}`)
+        if(categories.indexOf(category) === -1){
+            res.redirect('/welcome')
+        } else {
+            res.render('chat.ejs', {category:category})
+        }
+    });
 
 
+
+
+
+    // Middlwares
     function isAuthenticated(req,res,next){
         if(req.isAuthenticated()){
             return next();
