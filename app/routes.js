@@ -1,3 +1,35 @@
+const WebSocketServer = require('ws').Server;
+wss = new WebSocketServer({port: 40510})
+
+wss.on('connection', function (ws) {
+    console.log("connected clients: " + wss.clients.size)
+    ws.on('message', function (message) {
+        console.log(message)
+        var m = JSON.parse(message)
+        var status = "";
+        if(m.message === "customer connected" || m.message === "agent connected"){
+            status = 'connectionNotification'
+        } else {
+            status = 'chatMessage'
+        }
+        var msg = {
+            time: m.time,
+            user: m.user,
+            status: status,
+            message: m.message
+        }
+        wss.broadcast(JSON.stringify(msg))
+    })
+})
+
+wss.broadcast = function broadcast(data) {
+  wss.clients.forEach(function each(client) {
+      client.send(data);
+  });
+};
+
+
+
 module.exports = (function(app,passport){
     
     // Agent Routes
@@ -28,6 +60,11 @@ module.exports = (function(app,passport){
         })
     ); 
     
+
+    //General chat route
+    app.post('/chat', function(req,res){
+        wss.broadcast('message')      
+    })
 
     // Customer Routes
     /* reqIsFromCustomer middleware commented out until deployment */

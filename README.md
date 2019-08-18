@@ -8,19 +8,24 @@ A customer service chat client built with websockets
 Chatter requires a .env file with the following values populated in order to work:
 
 .env
+
     + `SESSION_SECRET` = session secret for express
+
     + `SERVER_PORT` = port number for the server to listen for connections on
+
     + `MONGOURL` = url of the mongo database being used (`mongodb://mongourl/databasename`)
+
     + `AGENT_WHITELIST` = Comma seperated IP addresses that act as a whitelist for agent access. Should probably throw this into a database somewhere, realistically this would become quite large.
 
 
 ### Current sprint missions
 
-+ Create a preliminary chat window UI for customer, and for agent
-+ Once created, set up the websockets server, and get it so that messages can be sent between agent/client
-    + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
-        + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
-        + Upon new chat being broadcast, front-end appends the new message to the chat window
++ ~~Create a preliminary chat window UI for customer, and for agent~~
++ ~~Once created, set up the websockets server, and get it so that messages can be sent between agent/client~~
+    + ~~Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets~~
+        + ~~Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?~~
+        + ~~Upon new chat being broadcast, front-end appends the new message to the chat window~~
+        + To add: A way to tell if the other user disconnected
     + From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them
         + Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent
         + Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.
@@ -44,6 +49,10 @@ Chatter requires a .env file with the following values populated in order to wor
 
 + Current Sprint completions:
     + Create preliminary chat window UI for customer, and for agent
++ Once created, set up the websockets server, and get it so that messages can be sent between agent/client
+    + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
+        + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
+        + Upon new chat being broadcast, front-end appends the new message to the chat window
 
 ### Outlook
 

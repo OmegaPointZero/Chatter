@@ -42,3 +42,23 @@
     margin-top: 2%;
     display: block;
 }
+
+.customerMessage{
+    max-width: 75%;
+    float: left;
+}
+
+.agentMessage{
+    max-width: 75%;
+    float: right;
+}
+
+.otherInfo{
+    font-weight: bold;
+    color: red;
+}
+
+.selfInfo{
+    font-weight: bold;
+    color: blue;
+}
