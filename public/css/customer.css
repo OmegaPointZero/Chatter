@@ -1,0 +1,44 @@
+.customerLoading{
+    max-height: 10vh;
+}
+
+.hidden{
+    display: none;
+}
+
+.chatWindow{
+    max-width: 95%;
+    height: 80vh;
+    margin: auto;
+    display: block;
+}
+
+.chatItems{
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    width: 90%;
+    min-height: 80%;
+    max-height: 85%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    margin: auto;
+}
+
+#newChatMessage{
+    width: 75%;
+    margin-right: 2%;
+    height: 10%;
+}
+
+#sendMessage{
+    width: 21.5%;
+    height: 10%;
+}
+
+#inputHolder{
+    width: 90%;
+    margin: auto;
+    margin-top: 2%;
+    display: block;
+}
