@@ -49,10 +49,10 @@ Chatter requires a .env file with the following values populated in order to wor
 
 + Current Sprint completions:
     + Create preliminary chat window UI for customer, and for agent
-+ Once created, set up the websockets server, and get it so that messages can be sent between agent/client
-    + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
-        + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
-        + Upon new chat being broadcast, front-end appends the new message to the chat window
+    + Once created, set up the websockets server, and get it so that messages can be sent between agent/client
+        + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
+            + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
+            + Upon new chat being broadcast, front-end appends the new message to the chat window
 
 ### Outlook
 
