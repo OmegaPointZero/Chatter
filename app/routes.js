@@ -5,6 +5,10 @@ module.exports = (function(app,passport){
         res.render('agenthome.ejs', {user: req.user})
     })    
 
+    app.get('/customerchat', reqIsFromAgent, isAuthenticated, (req,res) => {
+        res.render('customerchat.ejs', {user: req.user})
+    })    
+
     app.get('/login', reqIsFromAgent, (req,res) =>{
         if(req.isAuthenticated()){
             res.redirect('/')
@@ -26,11 +30,12 @@ module.exports = (function(app,passport){
     
 
     // Customer Routes
-    app.get('/welcome', reqIsFromCustomer, (req,res) => {
+    /* reqIsFromCustomer middleware commented out until deployment */
+    app.get('/welcome', /* reqIsFromCustomer, */ (req,res) => {
         res.render('home.ejs')
     })    
 
-    app.get('/chat/:category', reqIsFromCustomer, (req,res) => {
+    app.get('/chat/:category', /*reqIsFromCustomer,*/ (req,res) => {
         var category = req.params.category.toLowerCase();
         console.log(`Here's the category: ${category}`)
         var categories = process.env.CATEGORIES.split(', ') 

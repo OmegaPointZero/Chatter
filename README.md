@@ -14,6 +14,32 @@ Chatter requires a .env file with the following values populated in order to wor
     + `AGENT_WHITELIST` = Comma seperated IP addresses that act as a whitelist for agent access. Should probably throw this into a database somewhere, realistically this would become quite large.
 
 
+### Current sprint missions
+
++ Create a preliminary chat window UI for customer, and for agent
++ Once created, set up the websockets server, and get it so that messages can be sent between agent/client
+    + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
+        + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
+        + Upon new chat being broadcast, front-end appends the new message to the chat window
+    + From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them
+        + Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent
+        + Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.
+        + Test case 3: There are 2 agents logged in. Two customers connect. Passing: Two concurrent conversations happen. 
++ When previous 3 test cases are all passing, update the mongodb schema to save all conversations any agent has to their entry in the database.
+        + Test case 1: Conduct 3 conversations. Passing: 3 conversations all saved, independently and properly.
+
+### Next sprint mission
+
++ Build an actual UI for customers, and for agents
+    + Customers get a basic lorem ipsum page, and links to the possible chat categories
+    + Agents have an agent page, that has a link to let them become available for chats
+        + Passing: test it on chrome and firefox for Ubuntu and windows, plus chrome, firefox and dolphin on android
++ Create a seperate category of agent: Administrator
+    + Admins can create new agents
+    + Admins can assign categories to agents
+    + Admins can allow 1-4 chats per agent on the agent chat page
++ Update websockets infrastructure to match customers to agent by category only
+
 ### The latest updates
 
 Server skeleton works, enough to init and run with npm. If the user sends a req from the whitelist, the page for agents is rendered. If not, they get redirected to the welcome page for customers.
