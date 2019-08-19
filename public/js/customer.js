@@ -43,6 +43,7 @@ $(document).ready(function(){
             $('.customerLoading').addClass('hidden');
             var html = "<div class=\"serverMessage\">You are now connected with an agent!</div>"
             $('.chatItems').append(html)
+            $('textarea').attr('disabled',false)
         } else if(obj.status==="agentDisconnect"){
             $('textarea').attr('disabled','disabled')
             var html = "<div class=\"serverMessage\">The chat has been disconnected</div>"
