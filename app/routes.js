@@ -27,6 +27,8 @@ wss.on('connection', function (webSocket, req) {
             customers.push(uid)
         } else if (m.message === "customer connected" && agents.length > 0){
             status = 'connectionNotification'
+            console.log('Here\'s the agents:')
+            console.log(agents)
             var agent = agents[0];
             agents = agents.splice(1, agents.length);
             var m1 = {
@@ -41,12 +43,15 @@ wss.on('connection', function (webSocket, req) {
                 status: status,
                 myID: agent
             }
-            var agent = webSockets[agent]
             var conversation = {
                 agent: agent,
                 customer: uid
             }
+            console.log('Customer connected to waiting agent!')
+            console.log('here\'s the conversation:')
+            console.log(conversation)
             conversations.push(conversation)
+            var agent = webSockets[agent]
             agent.send(JSON.stringify(m2))
         } else if (m.message === "agent connected" && customers.length == 0){
             agents.push(uid)
@@ -72,6 +77,9 @@ wss.on('connection', function (webSocket, req) {
                 agent: uid,
                 customer: cust
             }
+            console.log('Agent connected to waiting customer!')
+            console.log('here\'s the conversation:')
+            console.log(conversation)
             conversations.push(conversation)
             customer.send(JSON.stringify(m2))
         } else {
