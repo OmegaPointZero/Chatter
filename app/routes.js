@@ -1,34 +1,104 @@
 const WebSocketServer = require('ws').Server;
 wss = new WebSocketServer({port: 40510})
 
-wss.on('connection', function (ws) {
-    console.log("connected clients: " + wss.clients.size)
-    ws.on('message', function (message) {
-        console.log(message)
+// all connections
+var webSockets = {}
+
+// agent and customer queue
+var agents = []
+var customers = []
+// list of concurrent conversations (objects)
+var conversations = []
+
+wss.on('connection', function (webSocket, req) {
+    var uid = Math.floor(new Date().getTime() * Math.random())
+    webSockets[uid] = webSocket;
+
+    webSocket.on('message', function (message) {
         var m = JSON.parse(message)
         var status = "";
-        if(m.message === "customer connected" || m.message === "agent connected"){
+        /* 
+            connection logic: build a queue of waiting agents/customers
+            when an agent connects, connect to fist available customer, and vice
+            versa. If none available, add to queue. When two get connected, send
+            them both each other's IDs to keep chats between only between them
+        */
+        if(m.message === "customer connected" && agents.length == 0){
+            customers.push(uid)
+        } else if (m.message === "customer connected" && agents.length > 0){
             status = 'connectionNotification'
+            var agent = agents[0];
+            agents = agents.splice(1, agents.length);
+            var m1 = {
+                agentID: agent,
+                status: status,
+                myID: uid
+            }
+            var customer = webSockets[uid]
+            customer.send(JSON.stringify(m1))
+            var m2 = {
+                customerID: uid,
+                status: status,
+                myID: agent
+            }
+            var agent = webSockets[agent]
+            var conversation = {
+                agent: agent,
+                customer: uid
+            }
+            conversations.push(conversation)
+            agent.send(JSON.stringify(m2))
+        } else if (m.message === "agent connected" && customers.length == 0){
+            agents.push(uid)
+        } else if (m.message === "agent connected" && customers.length > 0){ 
+            status = 'connectionNotification'
+            var cust = customers[0];
+            customers.splice(1, customers.length);
+            var m1 = {
+                customerID: cust,
+                status: status,
+                myID: uid
+            }
+            var agent = webSockets[uid]
+            agent.send(JSON.stringify(m1))
+            var m2 = {
+                agentID: uid,
+                status: status,
+                myID: customer
+            }
+            var customer = webSockets[cust]
+            var conversation = {
+                agent: uid,
+                customer: cust
+            }
+            conversations.push(conversation)
+            customer.send(JSON.stringify(m2))
         } else {
             status = 'chatMessage'
+            var target = webSockets[m.targetID]
+            var msg = {
+                target: m.targetID,
+                source: this.uid,
+                time: m.time,
+                user: m.user,
+                status: status,
+                message: m.message
+            }
+            target.send(JSON.stringify(msg))
         }
-        var msg = {
-            time: m.time,
-            user: m.user,
-            status: status,
-            message: m.message
-        }
-        wss.broadcast(JSON.stringify(msg))
     })
+
+    webSocket.on('close', function(){
+        conversations.forEach(function(convo, i){
+            if(convo.customer === uid){
+                agents.push(convo.agent)
+                conversations.splice(i,1)
+            }
+        })
+        delete webSockets[uid]
+    })
+
 })
-
-wss.broadcast = function broadcast(data) {
-  wss.clients.forEach(function each(client) {
-      client.send(data);
-  });
-};
-
-
 
 module.exports = (function(app,passport){
     

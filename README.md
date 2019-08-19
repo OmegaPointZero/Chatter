@@ -27,6 +27,8 @@ Chatter requires a .env file with the following values populated in order to wor
         + ~~Upon new chat being broadcast, front-end appends the new message to the chat window~~
         + To add: A way to tell if the other user disconnected
     + From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them
+        + Need a queue of customers waiting when not enough agents
+        + Need a queue of agents waiting when not enough customers
         + Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent
         + Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.
         + Test case 3: There are 2 agents logged in. Two customers connect. Passing: Two concurrent conversations happen. 
