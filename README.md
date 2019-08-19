@@ -49,10 +49,10 @@ Chatter requires a .env file with the following values populated in order to wor
     + Let agents access old conversations
 + DEBUGGING
     + Test cases:
-        + Connect agent first, then customer. Refresh agent page.
-            + Desired result: Customer notified of chat disconnection, told to F5 for new chat
-        + Connect agent first, then customer. Refresh customer page.
-            + Desired result: agent notified of chat disconnection, has new button to press to go back into the queue 
+        + ~~Connect agent first, then customer. Refresh agent page.~~
+            + ~~Desired result: Customer notified of chat disconnection, told to F5 for new chat~~
+        + ~~Connect agent first, then customer. Refresh customer page.~~
+            + ~~Desired result: agent notified of chat disconnection, has new button to press to go back into the queue~~
         + Connect customer first, then agent. Refresh agent page.
             + Desired result: Customer notified of chat disconnection, told to F5 for new chat
         + Connect customer first, then agent. Refresh customer page.
@@ -98,6 +98,10 @@ Chatter requires a .env file with the following values populated in order to wor
         + A notification to the user (agent or customer) that they ARE in fact chatting with someone, centered in the chat window
         + Make sure that the window renders in the right size for all browsers
         + Make sure appropriate divs get rendered
+    + TextArea stuff
+        + realign textarea and submit button into straight line
+        + Upon enter button being hit in the textarea, click() submit button
+
 ## Outlook
 
 Chatter is in it's initial stages. The current project outlook is as follows:
