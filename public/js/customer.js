@@ -32,6 +32,8 @@ $(document).ready(function(){
         if(obj.status ==="connectionNotification") {
             myID = obj.myID;
             agentID = obj.agentID;
+            $('#chatWindow').removeClass('hidden');
+            $('.customerLoading').addClass('hidden');
         }  else if(obj.status === "chatMessage" && obj.user ==="agent") {
             var html = "<div class=\"agentMessage\"><span class=\"otherInfo\">["+obj.time+"]:</span> "+obj.message+"</div><br>"  
             $('.chatItems').append(html)
