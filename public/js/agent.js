@@ -24,9 +24,10 @@ $(document).ready(function(){
         ws.send(JSON.stringify(msg))
         var html = "<div class=\"agentMessage\"><span class=\"selfInfo\">["+t+"]:</span> "+message+"</div><br>"  
         $('.chatItems').append(html)
+        $('textarea').val('')
     })    
 
-    $('textarea').on('click',function(e){
+    $('textarea').on('keypress',function(e){
         var code = (e.keyCode ? e.keyCode : e.which);
         if(code==13){
             $('#sendMessage').click();
