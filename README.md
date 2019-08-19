@@ -37,11 +37,34 @@ Chatter requires a .env file with the following values populated in order to wor
     + ~~Make sure that the window renders in the right size for all browsers~~
     + ~~Make sure appropriate divs get rendered~~
 + Upon customer disconnect, add agent back to queue _IF_ there is no customer queue, otherwise match _NEXT_ customer to agent
+    + Create button to let agent go back into queue upon customer disconnect
+        + Clear out/refresh chat from previous conversation
     + Figure out what the hell is going on when you refresh the page? Refreshing with an open chat crashes the server.
++ TextArea stuff
+    + realign textarea and submit button into straight line
+    + Upon enter button being hit in the textarea, click() submit button
 + ~~When previous 3 test cases are all passing,~~ update the mongodb schema to save all conversations any agent has to their entry in the database.
     + Test case 1: Conduct 3 conversations. Passing: 3 conversations all saved, independently and properly.
     + Upon saved chats, have agent chat window open in new tab
     + Let agents access old conversations
++ DEBUGGING
+    + Test cases:
+        + Connect agent first, then customer. Refresh agent page.
+            + Desired result: Customer notified of chat disconnection, told to F5 for new chat
+        + Connect agent first, then customer. Refresh customer page.
+            + Desired result: agent notified of chat disconnection, has new button to press to go back into the queue 
+        + Connect customer first, then agent. Refresh agent page.
+            + Desired result: Customer notified of chat disconnection, told to F5 for new chat
+        + Connect customer first, then agent. Refresh customer page.
+            + Desired result: agent notified of chat disconnection, has new button to press to go back into the queue 
+        + Connect customer first, then agent. Refresh customer, then agent.
+            + Desired result: the two get paired into a new chat again w/o server crashing.
+        + Connect customer first, then agent. Refresh agent, then customer.
+            + Desired result: the two get paired into a new chat again w/o server crashing.
+        + Connect agent first, then customer. Refresh customer, then agent.
+            + Desired result: the two get paired into a new chat again w/o server crashing.
+        + Connect agent first, then customer. Refresh agent, then customer.
+            + Desired result: the two get paired into a new chat again w/o server crashing.
 
 ## Next sprint mission
 
