@@ -46,20 +46,18 @@ Chatter requires a .env file with the following values populated in order to wor
             + ~~Desired result: Customer notified of chat disconnection, told to F5 for new chat~~
         + ~~Connect agent first, then customer. Refresh customer page.~~
             + ~~Desired result: agent notified of chat disconnection, has new button to press to go back into the queue~~
-        + Connect customer first, then agent. Refresh agent page.
-            + Desired result: Customer notified of chat disconnection, told to F5 for new chat
-            + _ACTUAL_: Customer notified of chat disconnection, immediately reconnected to new chat
-        + Connect customer first, then agent. Refresh customer page.
-            + Desired result: agent notified of chat disconnection, has new button to press to go back into the queue 
-            + _ACTUAL_: Agent notified of chat disconnection, immediately reconnected to new chat
-        + Connect customer first, then agent. Refresh customer, then agent.
-            + Desired result: the two get paired into a new chat again w/o server crashing.
-        + Connect customer first, then agent. Refresh agent, then customer.
-            + Desired result: the two get paired into a new chat again w/o server crashing.
-        + Connect agent first, then customer. Refresh customer, then agent.
-            + Desired result: the two get paired into a new chat again w/o server crashing.
-        + Connect agent first, then customer. Refresh agent, then customer.
-            + Desired result: the two get paired into a new chat again w/o server crashing.
+        + ~~Connect customer first, then agent. Refresh agent page.~~
+            + ~~Desired result: Customer notified of chat disconnection, told to F5 for new chat~~
+        + ~~Connect customer first, then agent. Refresh customer page.~~
+            + Desired result: agent notified of chat disconnection, has new button to press to go back into the queue~~
+        + ~~Connect customer first, then agent. Refresh customer, then agent.~~
+            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
+        + ~~Connect customer first, then agent. Refresh agent, then customer.~~
+            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
+        + ~~Connect agent first, then customer. Refresh customer, then agent.~~
+            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
+        + ~~Connect agent first, then customer. Refresh agent, then customer.~~
+            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
 
 ## Next sprint mission
 

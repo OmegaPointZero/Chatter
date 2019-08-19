@@ -55,5 +55,9 @@ $(document).ready(function(){
             $('.chatItems').append(html)
         }
     })    
+
+    ws.close(function(){
+        alert('Connection closed!')
+    })
     
 })
