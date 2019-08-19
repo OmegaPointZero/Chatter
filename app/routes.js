@@ -59,6 +59,7 @@ wss.on('connection', function (webSocket, req) {
                 status: status,
                 myID: uid
             }
+            console.log(`uid: ${uid}`)
             var agent = webSockets[uid]
             agent.send(JSON.stringify(m1))
             var m2 = {
@@ -92,6 +93,12 @@ wss.on('connection', function (webSocket, req) {
         conversations.forEach(function(convo, i){
             if(convo.customer === uid){
                 agents.push(convo.agent)
+                var ag = webSockets[convo.agent]
+                ag.send(JSON.stringify({'status':'customerDisconnect'}))
+                conversations.splice(i,1)
+            } else if(convo.agent === uid){
+                var cs = webSockets[convo.customer]
+                cs.send(JSON.stringify({'status':'agentDisconnect'}))
                 conversations.splice(i,1)
             }
         })

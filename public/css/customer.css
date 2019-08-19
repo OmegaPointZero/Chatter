@@ -4,9 +4,10 @@
 
 .hidden{
     display: none;
+    visibility: hidden;
 }
 
-.chatWindow{
+#chatWindow{
     max-width: 95%;
     height: 80vh;
     margin: auto;
@@ -61,4 +62,9 @@
 .selfInfo{
     font-weight: bold;
     color: blue;
+}
+
+.serverMessage{
+    margin: auto;
+    text-align: center;
 }

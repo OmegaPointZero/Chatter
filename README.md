@@ -32,11 +32,12 @@ Chatter requires a .env file with the following values populated in order to wor
         + ~~Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent~~
         + ~~Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.~~
         + ~~Test case 3: There are 2 agents logged in. Two customers connect. Passing: Two concurrent conversations happen.~~
-+ To add to the front-end:
-    + A notification to the user (agent or customer) that they ARE in fact chatting with someone, centered in the chat window
-    + Make sure that the window renders in the right size for all browsers
-    + Make sure appropriate divs get rendered
++ ~~To add to the front-end:~~
+    + ~~A notification to the user (agent or customer) that they ARE in fact chatting with someone, centered in the chat window~~
+    + ~~Make sure that the window renders in the right size for all browsers~~
+    + ~~Make sure appropriate divs get rendered~~
 + Upon customer disconnect, add agent back to queue _IF_ there is no customer queue, otherwise match _NEXT_ customer to agent
+    + Figure out what the hell is going on when you refresh the page? Refreshing with an open chat crashes the server.
 + ~~When previous 3 test cases are all passing,~~ update the mongodb schema to save all conversations any agent has to their entry in the database.
     + Test case 1: Conduct 3 conversations. Passing: 3 conversations all saved, independently and properly.
     + Upon saved chats, have agent chat window open in new tab
@@ -69,7 +70,10 @@ Chatter requires a .env file with the following values populated in order to wor
         + Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent
         + Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.
         + Test case 3: There are 2 agents logged in. Two customers connect. Passing: Two concurrent conversations happen.
-
+    + To add to the front-end:
+        + A notification to the user (agent or customer) that they ARE in fact chatting with someone, centered in the chat window
+        + Make sure that the window renders in the right size for all browsers
+        + Make sure appropriate divs get rendered
 ## Outlook
 
 Chatter is in it's initial stages. The current project outlook is as follows:

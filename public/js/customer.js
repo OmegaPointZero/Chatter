@@ -26,6 +26,13 @@ $(document).ready(function(){
         $('.chatItems').append(html)
     })    
 
+    $('textarea').on('click',function(e){
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code==13){
+            $('#sendMessage').click();
+        }
+    })
+
     ws.onmessage = (function(ev) {  
         var obj = JSON.parse(ev.data)
         console.log(obj)
@@ -34,7 +41,13 @@ $(document).ready(function(){
             agentID = obj.agentID;
             $('#chatWindow').removeClass('hidden');
             $('.customerLoading').addClass('hidden');
-        }  else if(obj.status === "chatMessage" && obj.user ==="agent") {
+            var html = "<div class=\"serverMessage\">You are now connected with an agent!</div>"
+            $('.chatItems').append(html)
+        } else if(obj.status==="agentDisconnect"){
+            $('textarea').attr('disabled','disabled')
+            var html = "<div class=\"serverMessage\">The chat has been disconnected</div>"
+            $('.chatItems').append(html)
+        } else if(obj.status === "chatMessage" && obj.user ==="agent") {
             var html = "<div class=\"agentMessage\"><span class=\"otherInfo\">["+obj.time+"]:</span> "+obj.message+"</div><br>"  
             $('.chatItems').append(html)
         }

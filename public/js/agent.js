@@ -26,12 +26,26 @@ $(document).ready(function(){
         $('.chatItems').append(html)
     })    
 
+    $('textarea').on('click',function(e){
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if(code==13){
+            $('#sendMessage').click();
+        }
+    })
+
     ws.onmessage = (function(ev) {  
         var obj = JSON.parse(ev.data)
         console.log(obj)
         if(obj.status ==="connectionNotification") {
             myID = obj.myID;
             customerID = obj.customerID;
+            var html = "<div class=\"serverMessage\">New customer connected!</div>"
+            $('.chatItems').append(html)
+            $('textarea').attr('disabled',false)
+        } else if(obj.status==="customerDisconnect"){
+            $('textarea').attr('disabled','disabled')
+            var html = "<div class=\"serverMessage\">Customer Disconnected!</div>"
+            $('.chatItems').append(html)
         } else if(obj.status === "chatMessage" && obj.user ==="customer") {
             var html = "<div class=\"customerMessage\"><span class=\"otherInfo\">["+obj.time+"]:</span> "+obj.message+"</div><br>"  
             $('.chatItems').append(html)

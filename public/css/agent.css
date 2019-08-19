@@ -4,6 +4,7 @@
 
 .hidden{
     display: none;
+    visibility: hidden;
 }
 
 .agentChatWindow11{
@@ -61,4 +62,9 @@
 .selfInfo{
     font-weight: bold;
     color: blue;
+}
+
+.serverMessage{
+    margin: auto;
+    text-align: center;
 }
