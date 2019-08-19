@@ -25,7 +25,7 @@ Chatter requires a .env file with the following values populated in order to wor
     + ~~Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets~~
         + ~~Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?~~
         + ~~Upon new chat being broadcast, front-end appends the new message to the chat window~~
-        + To add: A way to tell a chatter if the other user disconnected
+        + ~~To add: A way to tell a chatter if the other user disconnected~~
     + ~~From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them~~
         + ~~Need a queue of customers waiting when not enough agents~~
         + ~~Need a queue of agents waiting when not enough customers~~
@@ -64,6 +64,7 @@ Chatter requires a .env file with the following values populated in order to wor
         + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
             + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
             + Upon new chat being broadcast, front-end appends the new message to the chat window
+        + To add: A way to tell a chatter if the other user disconnected
     + From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them
         + Need a queue of customers waiting when not enough agents
         + Need a queue of agents waiting when not enough customers

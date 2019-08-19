@@ -90,13 +90,18 @@ wss.on('connection', function (webSocket, req) {
     })
 
     webSocket.on('close', function(){
+        console.log(`uid disconnected: ${uid}`)
         conversations.forEach(function(convo, i){
             if(convo.customer === uid){
+                console.log('found matching convo:')
+                console.log(convo)
                 agents.push(convo.agent)
                 var ag = webSockets[convo.agent]
                 ag.send(JSON.stringify({'status':'customerDisconnect'}))
                 conversations.splice(i,1)
             } else if(convo.agent === uid){
+                console.log('found matching convo:')
+                console.log(convo)
                 var cs = webSockets[convo.customer]
                 cs.send(JSON.stringify({'status':'agentDisconnect'}))
                 conversations.splice(i,1)
