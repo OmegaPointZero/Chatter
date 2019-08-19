@@ -17,8 +17,7 @@ wss.on('connection', function (webSocket, req) {
     webSocket.on('message', function (message) {
         var m = JSON.parse(message)
         var status = "";
-        /* 
-            connection logic: build a queue of waiting agents/customers
+        /*  connection logic: build a queue of waiting agents/customers
             when an agent connects, connect to fist available customer, and vice
             versa. If none available, add to queue. When two get connected, send
             them both each other's IDs to keep chats between only between them
@@ -27,8 +26,6 @@ wss.on('connection', function (webSocket, req) {
             customers.push(uid)
         } else if (m.message === "customer connected" && agents.length > 0){
             status = 'connectionNotification'
-            console.log('Here\'s the agents:')
-            console.log(agents)
             var agent = agents[0];
             agents = agents.splice(1, agents.length);
             var m1 = {
@@ -47,9 +44,6 @@ wss.on('connection', function (webSocket, req) {
                 agent: agent,
                 customer: uid
             }
-            console.log('Customer connected to waiting agent!')
-            console.log('here\'s the conversation:')
-            console.log(conversation)
             conversations.push(conversation)
             var agent = webSockets[agent]
             agent.send(JSON.stringify(m2))
@@ -64,7 +58,6 @@ wss.on('connection', function (webSocket, req) {
                 status: status,
                 myID: uid
             }
-            console.log(`uid: ${uid}`)
             var agent = webSockets[uid]
             agent.send(JSON.stringify(m1))
             var m2 = {
@@ -77,9 +70,6 @@ wss.on('connection', function (webSocket, req) {
                 agent: uid,
                 customer: cust
             }
-            console.log('Agent connected to waiting customer!')
-            console.log('here\'s the conversation:')
-            console.log(conversation)
             conversations.push(conversation)
             customer.send(JSON.stringify(m2))
         } else {
@@ -98,18 +88,22 @@ wss.on('connection', function (webSocket, req) {
     })
 
     webSocket.on('close', function(){
-        console.log(`uid disconnected: ${uid}`)
+    /* if customer refreshed while in the queue, remove them from the queue */
+        var agentIndex = agents.indexOf(uid)
+        if(agentIndex !== -1){
+            agents.splice(agentIndex,1)
+        } else {
+            var customerIndex = customers.indexOf(uid)
+            customers.splice(customerIndex,1)
+        }
+    /* Delete conversation and notify other party of the disconnect */
         conversations.forEach(function(convo, i){
             if(convo.customer === uid){
-                console.log('found matching convo:')
-                console.log(convo)
                 agents.push(convo.agent)
                 var ag = webSockets[convo.agent]
                 ag.send(JSON.stringify({'status':'customerDisconnect'}))
                 conversations.splice(i,1)
             } else if(convo.agent === uid){
-                console.log('found matching convo:')
-                console.log(convo)
                 var cs = webSockets[convo.customer]
                 cs.send(JSON.stringify({'status':'agentDisconnect'}))
                 conversations.splice(i,1)

@@ -49,6 +49,7 @@ $(document).ready(function(){
             $('textarea').attr('disabled','disabled')
             var html = "<div class=\"serverMessage\">The chat has been disconnected</div>"
             $('.chatItems').append(html)
+            ws.close()
         } else if(obj.status === "chatMessage" && obj.user ==="agent") {
             var html = "<div class=\"agentMessage\"><span class=\"otherInfo\">["+obj.time+"]:</span> "+obj.message+"</div><br>"  
             $('.chatItems').append(html)
