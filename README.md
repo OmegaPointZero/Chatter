@@ -20,44 +20,11 @@ Chatter requires a .env file with the following values populated in order to wor
 
 ## Current sprint missions
 
-+ ~~Create a preliminary chat window UI for customer, and for agent~~
-+ ~~Once created, set up the websockets server, and get it so that messages can be sent between agent/client~~
-    + ~~Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets~~
-        + ~~Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?~~
-        + ~~Upon new chat being broadcast, front-end appends the new message to the chat window~~
-        + ~~To add: A way to tell a chatter if the other user disconnected~~
-    + ~~From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them~~
-        + ~~Need a queue of customers waiting when not enough agents~~
-        + ~~Need a queue of agents waiting when not enough customers~~
-        + ~~Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent~~
-        + ~~Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.~~
-        + ~~Test case 3: There are 2 agents logged in. Two customers connect. Passing: Two concurrent conversations happen.~~
-+ ~~To add to the front-end:~~
-    + ~~A notification to the user (agent or customer) that they ARE in fact chatting with someone, centered in the chat window~~
-    + ~~Make sure that the window renders in the right size for all browsers~~
-    + ~~Make sure appropriate divs get rendered~~
-+ ~~When previous 3 test cases are all passing,~~ update the mongodb schema to save all conversations any agent has to their entry in the database.
++ Update the mongodb schema to save all conversations any agent has to their entry in the database.
     + Test case 1: Conduct 3 conversations. Passing: 3 conversations all saved, independently and properly.
     + Upon saved chats, have agent chat window open in new tab
     + Let agents access old conversations
-+ DEBUGGING
-    + Test cases:
-        + ~~Connect agent first, then customer. Refresh agent page.~~
-            + ~~Desired result: Customer notified of chat disconnection, told to F5 for new chat~~
-        + ~~Connect agent first, then customer. Refresh customer page.~~
-            + ~~Desired result: agent notified of chat disconnection, has new button to press to go back into the queue~~
-        + ~~Connect customer first, then agent. Refresh agent page.~~
-            + ~~Desired result: Customer notified of chat disconnection, told to F5 for new chat~~
-        + ~~Connect customer first, then agent. Refresh customer page.~~
-            + Desired result: agent notified of chat disconnection, has new button to press to go back into the queue~~
-        + ~~Connect customer first, then agent. Refresh customer, then agent.~~
-            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
-        + ~~Connect customer first, then agent. Refresh agent, then customer.~~
-            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
-        + ~~Connect agent first, then customer. Refresh customer, then agent.~~
-            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
-        + ~~Connect agent first, then customer. Refresh agent, then customer.~~
-            + ~~Desired result: the two get paired into a new chat again w/o server crashing.~~
+
 
 ## Next sprint mission
 
@@ -75,25 +42,11 @@ Chatter requires a .env file with the following values populated in order to wor
 ## The latest updates
 
 + Current Sprint completions:
-    + Create preliminary chat window UI for customer, and for agent
-    + Once created, set up the websockets server, and get it so that messages can be sent between agent/client
-        + Initial setup, use 'broadcast' to blast messages to everyone connected to the websockets
-            + Message contents kept in an object, either 'customer' or agent name, timestamp, category, unique conversation id?
-            + Upon new chat being broadcast, front-end appends the new message to the chat window
-        + To add: A way to tell a chatter if the other user disconnected
-    + From there, keep building the server to connect a customer to only ONE agent, keep the communication between only the 2 of them
-        + Need a queue of customers waiting when not enough agents
-        + Need a queue of agents waiting when not enough customers
-        + Test case 1: There are 2 agents logged in. One customer connects. Passing: Customer chat only appears to one agent
-        + Test case 2: There is 1 agent logged in. Two customers connect. Passing: One customer waits until the agent is done, messages only exchange between the agent and customer, waiting customer doesn't see the other conversation.
-        + Test case 3: There are 2 agents logged in. Two customers connect. Passing: Two concurrent conversations happen.
-    + To add to the front-end:
-        + A notification to the user (agent or customer) that they ARE in fact chatting with someone, centered in the chat window
-        + Make sure that the window renders in the right size for all browsers
-        + Make sure appropriate divs get rendered
-    + TextArea stuff
-        + realign textarea and submit button into straight line
-        + Upon enter button being hit in the textarea, click() submit button
+    + Preliminary chat UI for customers and agents created
+    + Chats are kept between one agent and one client
+    + There is a queue of agents and clients waiting, when there are more of one waiting than the other
+    + Upon one client disconnection, the other party is notified of the disconnection, and prevented from sending further messages
+    + Agent can choose when to jump back in the queue after finishing a chat with a customer
 
 ## Outlook
 
